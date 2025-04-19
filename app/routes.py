@@ -20,7 +20,7 @@ OPENWEATHER_API_KEY = "cb8c650d1f8d8adbbbe2c4ea48113daf"  # Sua chave da API
 
 @main_bp.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("../index.html")
 
 
 @main_bp.route("/get_solar", methods=["POST"])
