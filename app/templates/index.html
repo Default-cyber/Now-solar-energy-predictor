@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise de Potencial Solar</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>☀️ Simulador de Energia Solar</h1>
+        <div class="search-box">
+            <input type="text" id="search-input" placeholder="Digite uma cidade ou endereço">
+            <button onclick="searchLocation()">🔍 Buscar</button>
+        </div>
+        <div id="map"></div>
+        <div class="results-card">
+            <h2>Resultados</h2>
+
+            <!-- Localização -->
+            <div class="location-info">
+                <p id="coordinates">Coordenadas: -</p>
+            </div>
+
+            <!-- Dados de Energia Solar -->
+            <div class="energy-info">
+                <h3>Desempenho Solar</h3>
+                <p id="annual-production">Produção Anual Estimada: -</p>
+                <p id="efficiency">Eficiência: -</p>
+            </div>
+
+            <!-- Dados Climáticos -->
+            <div class="weather-info">
+                <h3>Condições Atuais</h3>
+                <div class="weather-header">
+                    <img id="weather-icon" src="" alt="Ícone do Clima">
+                    <span id="weather-description" class="weather-description">-</span>
+                </div>
+                <div class="weather-details">
+                    <div class="weather-item">
+                        <span>🌡️ Temperatura:</span>
+                        <span id="weather-temp">- °C</span>
+                    </div>
+                    <div class="weather-item">
+                        <span>💧 Umidade:</span>
+                        <span id="weather-humidity">- %</span>
+                    </div>
+                    <div class="weather-item">
+                        <span>🌪️ Vento:</span>
+                        <span id="weather-wind">- m/s</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
