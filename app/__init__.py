@@ -2,6 +2,6 @@ from flask import Flask
 from .routes import main_bp
 
 def create_app():
-    app = Flask(__name__, template_folder='templates')
+    app = Flask(__name__, template_folder='app/templates')
     app.register_blueprint(main_bp)
     return app
