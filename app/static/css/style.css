@@ -1,0 +1,129 @@
+/* --- Variáveis Originais --- */
+:root {
+  --primary:   #5B42F3;
+  --secondary: #00DDEB;
+  --bg:        #f4f6f8;
+  --card-bg:   #ffffff;
+  --text:      #333;
+}
+
+/* --- Tema Escuro --- */
+:root.dark-mode {
+  --bg:   #1c1f26;
+  --text: #e5e5e5;
+}
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s, color 0.3s;
+}
+
+/* --- Redução de Animações --- */
+body.reduce-motion *,
+body.reduce-motion *::before,
+body.reduce-motion *::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* Container e Grid */
+.container {
+  display: grid;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: auto;
+  padding: 1rem;
+}
+@media(min-width: 992px) {
+  .container {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+/* Header */
+.header {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+/* Mapa */
+#map {
+  height: 500px;
+  border-radius: 8px;
+  border: 2px solid #ddd;
+}
+
+/* Busca */
+.search-box {
+  display: inline-flex;
+  gap: .5rem;
+  margin-top: 1rem;
+}
+.search-box input {
+  padding: .75rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  flex: 1;
+}
+.search-box button {
+  background: var(--primary);
+  border: none;
+  padding: .75rem 1.5rem;
+  border-radius: 5px;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform .2s, box-shadow .2s;
+}
+.search-box button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Card de resultados */
+.results-card {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  display: grid;
+  gap: 1rem;
+}
+
+/* Badges de eficiência */
+.efficiency-badge {
+  display: inline-block;
+  padding: .25rem .75rem;
+  border-radius: 12px;
+  font-family: 'Orbitron', sans-serif;
+  transition: background .3s, color .3s;
+}
+.efficiency-excelente { background: #2ecc71; color: white; }
+.efficiency-muito\ boa { background: #27ae60; color: white; }
+.efficiency-boa       { background: #f1c40f; color: #222; }
+.efficiency-média     { background: #e67e22; color: white; }
+.efficiency-baixa     { background: #e74c3c; color: white; }
+
+/* Weather */
+.weather-info {
+  background: #eef1f5;
+  padding: 1rem;
+  border-radius: 8px;
+}
+.weather-header {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+.weather-details {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .75rem;
+}
+.weather-details span {
+  display: block;
+}

@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+
+{% block title %}Calculadora Solar Avançada{% endblock %}
+
+{% block head %}
+<style>
+  :root {
+    --primary: #5B42F3;
+    --accent: #00DDEB;
+    --bg-card: #f0f0f3;
+    --text: #333;
+  }
+  .calc-card {
+    background: var(--bg-card);
+    padding: 2rem;
+    border-radius: 1rem;
+    max-width: 500px;
+    margin: 2rem auto;
+    box-shadow:
+      8px 8px 16px rgba(0,0,0,0.1),
+      -8px -8px 16px rgba(255,255,255,0.7);
+    display: grid;
+    gap: 1.5rem;
+  }
+  fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+  legend {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: .5rem;
+    color: var(--primary);
+  }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .form-group label {
+    margin-bottom: .25rem;
+    font-weight: 500;
+  }
+  .form-group input {
+    padding: .75rem 1rem;
+    border: none;
+    border-radius: .5rem;
+    font-size: 1rem;
+    box-shadow: inset 4px 4px 8px rgba(0,0,0,0.05),
+                inset -4px -4px 8px rgba(255,255,255,0.7);
+    transition: box-shadow .2s;
+  }
+  .form-group input:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--accent);
+  }
+  .form-group .tooltip {
+    position: absolute;
+    right: 1rem;
+    top: 2rem;
+    font-size: .85rem;
+    color: #666;
+  }
+  .btn {
+    background: var(--primary);
+    color: #fff;
+    padding: .9rem;
+    border: none;
+    border-radius: .6rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  }
+  .results {
+    text-align: left;
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: .8rem;
+    box-shadow: 4px 4px 12px rgba(0,0,0,0.05),
+                -4px -4px 12px rgba(255,255,255,0.7);
+    margin-top: 1rem;
+  }
+  .results p {
+    margin: .5rem 0;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="calc-card">
+  <h1>🔆 Calculadora de Energia Solar</h1>
+
+  <form id="calc-form" novalidate>
+    <fieldset>
+      <legend>Dados dos Painéis</legend>
+      <div class="form-group">
+        <label for="watt_per_panel">Potência por painel (W)</label>
+        <input type="number" id="watt_per_panel" placeholder="Ex: 400" required>
+        <span class="tooltip"><i class="fas fa-info-circle"></i> Valor nominal do painel</span>
+      </div>
+      <div class="form-group">
+        <label for="num_panels">Número de painéis</label>
+        <input type="number" id="num_panels" placeholder="Ex: 15" required>
+        <span class="tooltip"><i class="fas fa-info-circle"></i> Quantos serão instalados</span>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Configuração Solar</legend>
+      <div class="form-group">
+        <label for="sun_hours">Horas de sol/dia</label>
+        <input type="number" step="0.1" id="sun_hours" placeholder="Ex: 5.0" required>
+        <span class="tooltip"><i class="fas fa-sun"></i> Média diária</span>
+      </div>
+      <div class="form-group">
+        <label for="efficiency">Eficiência (%)</label>
+        <input type="number" step="0.1" id="efficiency" value="85" required>
+        <span class="tooltip"><i class="fas fa-percentage"></i> Perdas incluídas</span>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Economia e Custo</legend>
+      <div class="form-group">
+        <label for="tariff">Tarifa (R$/kWh)</label>
+        <input type="number" step="0.01" id="tariff" placeholder="Ex: 0.80" required>
+        <span class="tooltip"><i class="fas fa-dollar-sign"></i> Tarifa atual</span>
+      </div>
+      <div class="form-group">
+        <label for="install_cost">Custo de instalação (R$)</label>
+        <input type="number" step="0.01" id="install_cost" placeholder="Ex: 30000">
+        <span class="tooltip"><i class="fas fa-tools"></i> Investimento total</span>
+      </div>
+    </fieldset>
+
+    <button type="submit" class="btn">Calcular</button>
+  </form>
+
+  <div id="calc-results" class="results" style="display:none;">
+    <h2>Resultados</h2>
+    <p>🔋 <strong>Energia Anual Estimada:</strong> <span id="res-annual-kwh"></span> kWh</p>
+    <p>💰 <strong>Economia Anual:</strong> R$ <span id="res-savings"></span></p>
+    <p>⏱️ <strong>Payback:</strong> <span id="res-payback"></span> anos</p>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/calculator.js') }}"></script>
+{% endblock %}

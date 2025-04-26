@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="{{ 'dark-mode' if session.get('theme')=='dark' }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Análise de Potencial Solar</title>
+
+  <!-- Fontes e Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha384-nRgPTkuX86pH8yjPJUAFuASXQSSl2/bBUiNV47vSYpKFxHJhbcrGnmlYpYJMeD7a"
+    crossorigin="anonymous"
+  />
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <header class="header">
+    <button id="theme-toggle" aria-label="Alternar tema">🌞/🌜</button>
+  </header>
+
+  <div class="container">
+    <h1>☀️ Simulador de Energia Solar</h1>
+    <div class="search-box">
+      <input type="text" id="search-input" placeholder="Digite uma cidade ou endereço">
+      <button onclick="searchLocation()">🔍 Buscar</button>
+    </div>
+    <div id="map"></div>
+
+    <div class="results-card">
+      <h2>Resultados</h2>
+      <div class="location-info">
+        <p id="coordinates">Coordenadas: -</p>
+      </div>
+      <div class="energy-info">
+        <h3>Desempenho Solar</h3>
+        <p id="annual-production">Produção Anual Estimada: -</p>
+        <p id="efficiency" class="efficiency-badge">-</p>
+      </div>
+      <!-- Dados Climáticos -->
+      <div class="weather-info">
+        <h3>Condições Atuais</h3>
+        <div class="weather-header">
+          <img id="weather-icon" src="" alt="Ícone do Clima">
+          <span id="weather-description">-</span>
+        </div>
+        <div class="weather-details">
+          <div class="weather-item"><span>🌡️ Temperatura:</span><span id="weather-temp">- °C</span></div>
+          <div class="weather-item"><span>💧 Umidade:</span><span id="weather-humidity">- %</span></div>
+          <div class="weather-item"><span>🌪️ Vento:</span><span id="weather-wind">- m/s</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="{{ url_for('static', filename='js/theme-toggle.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

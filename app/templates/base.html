@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="{{ 'dark-mode' if theme=='dark' }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}SolarApp{% endblock %}</title>
+
+  <!-- Fontes e Ícones -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha384-nRgPTkuX86pH8yjPJUAFuASXQSSl2/bBUiNV47vSYpKFxHJhbcrGnmlYpYJMeD7a"
+    crossorigin="anonymous"
+  />
+
+  <!-- Estilos principais -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <header class="header">
+    <button id="theme-toggle" aria-label="Alternar tema">🌞/🌜</button>
+  </header>
+
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Scripts comuns -->
+  <script src="{{ url_for('static', filename='js/theme-toggle.js') }}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>
