@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import os
 from dotenv import load_dotenv
 from flask import Flask
@@ -27,3 +28,15 @@ app = create_app()
 if __name__ == "__main__":
     # Também funciona chamando diretamente o arquivo
     app.run(debug=True)
+=======
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+if __name__ == '__main__':
+    app.run(debug=True)
+>>>>>>> 1b4b43b343abefa05bf9751eba7bc9afdb15814f
